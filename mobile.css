@@ -1,0 +1,382 @@
+/* ==========================================================
+   mobile.css — адаптация под экраны <= 748px
+   Подключать ПОСЛЕДНИМ (после style.css, modalPlant.css, bmo.css),
+   чтобы переопределить их старые медиазапросы.
+   ========================================================== */
+
+/* ---------- Базовые стили (десктоп): нижнее меню и toast скрыты ---------- */
+.mobile-menu {
+    display: none;
+}
+
+.toast {
+    position: fixed;
+    left: 50%;
+    bottom: calc(70px + env(safe-area-inset-bottom, 0px));
+    transform: translate(-50%, 20px);
+    max-width: 90vw;
+    padding: 12px 20px;
+    border-radius: 12px;
+    background: rgba(0, 0, 0, 0.88);
+    color: #fff;
+    font-size: 1rem;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    z-index: 950;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translate(-50%, 0);
+}
+
+@media (max-width: 748px) {
+
+    /* ---------- Страница ---------- */
+    body {
+        padding: 10px 10px calc(64px + env(safe-area-inset-bottom, 0px));
+        min-height: 100vh;
+        min-height: 100dvh;
+    }
+
+    .wrapper,
+    .wrapper_sea,
+    .wrapper_run {
+        height: auto;
+    }
+
+    .page,
+    .page_sea,
+    .page_run {
+        padding: 20px 14px;
+        min-height: 0;
+    }
+
+    .timer {
+        gap: 14px;
+        width: 100%;
+    }
+
+    .timer_title h1,
+    .timer_title_sea h1,
+    .timer_title_run h1 {
+        font-size: 1.7rem; /* в style.css было 0.3rem */
+        margin-bottom: 0;
+    }
+
+    .timechoose,
+    .timechoose_sea,
+    .timechoose_run {
+        width: 100%;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .timechoose button,
+    .timechoose_sea button,
+    .timechoose_run button {
+        flex: 1 1 80px;
+        min-width: 0;
+        max-width: 100px;
+        width: auto;
+        height: 48px;
+        font-size: 1.1rem;
+    }
+
+    .plant button,
+    .plant_sea button,
+    .plant_run button {
+        padding: 14px 24px;
+        font-size: 1.3rem;
+    }
+
+    .timer_clock,
+    .timer_clock_sea,
+    .timer_clock_run {
+        font-size: clamp(2.2rem, 13vw, 3.2rem);
+        padding: 6px 28px;
+        margin: 0;
+    }
+
+    .plant_container {
+        width: min(70vw, 300px);
+        height: min(70vw, 300px);
+        margin: 0;
+    }
+
+    .timer_time {
+        gap: 16px;
+        margin-top: 0;
+    }
+
+    .timer_time button {
+        width: 60px;
+        height: 60px;
+    }
+
+    /* ---------- Боковое меню скрыто, вместо него нижняя шторка ---------- */
+    .menu {
+        display: none !important;
+    }
+
+    .mobile-menu {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 900; /* ниже модалки выбора виджета (1000) */
+        background: rgba(0, 0, 0, 0.88);
+        -webkit-backdrop-filter: blur(6px);
+        backdrop-filter: blur(6px);
+        border-radius: 16px 16px 0 0;
+        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.4);
+        padding-bottom: env(safe-area-inset-bottom, 0px);
+    }
+
+    .mobile-menu__handle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 44px;
+        border: 0;
+        background: transparent;
+        color: yellow;
+        font-size: 1.5rem;
+        cursor: pointer;
+        touch-action: manipulation;
+    }
+
+    .mobile-menu__handle i {
+        display: block;
+        transition: transform 0.25s ease;
+    }
+
+    .mobile-menu.is-open .mobile-menu__handle i {
+        transform: rotate(180deg);
+    }
+
+    /* Свёрнуто: высота 0 и visibility:hidden (кнопки недоступны для фокуса) */
+    .mobile-menu__content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        max-height: 0;
+        padding: 0 16px;
+        overflow: hidden;
+        visibility: hidden;
+        overscroll-behavior: contain;
+        transition: max-height 0.3s ease, visibility 0s linear 0.3s;
+    }
+
+    .mobile-menu.is-open .mobile-menu__content {
+        max-height: min(70vh, 480px);
+        padding-bottom: 16px;
+        overflow-y: auto;
+        visibility: visible;
+        transition: max-height 0.3s ease;
+    }
+
+    /* .menu_content переехал сюда: убираем десктопные размеры, показываем всегда
+       (!important перебивает inline display:none от setMenuOpen) */
+    .mobile-menu__content .menu_content {
+        display: flex !important;
+        width: 100%;
+        height: auto;
+        background: transparent;
+    }
+
+    .mobile-menu__content .menu_content > div {
+        width: 100%;
+    }
+
+    .mobile-menu__content .menu_content button {
+        width: 100%;
+        margin-top: 10px;
+        padding: 12px;
+        font-size: 1rem;
+    }
+
+    /* footer в style.css — position: fixed, возвращаем в поток */
+    .mobile-menu__content footer {
+        position: static;
+        width: auto;
+        height: auto;
+        padding: 14px 0 0;
+        font-size: 0.8rem;
+        opacity: 0.8;
+        justify-content: center;
+    }
+
+    /* ---------- BMO внутри шторки ---------- */
+    .mobile-menu__content .bmo-body {
+        position: relative;
+        left: auto;
+        bottom: auto;
+        flex-shrink: 0;
+        margin: 40px auto 6px; /* сверху место под «голову» BMO */
+    }
+
+    .mobile-menu__content .bmo-tooltip {
+        display: none;
+    }
+
+    /* ---------- Окно перерыва недоступно (подстраховка к проверке в JS) ---------- */
+    .break-modal,
+    .break-modal::backdrop {
+        display: none !important;
+    }
+
+    /* ---------- Модальное окно выбора виджета/музыки ---------- */
+    .modal-content,
+    .modal-content-sea,
+    .modal-content-run {
+        width: 94%;
+        max-height: 90vh;
+        max-height: 90dvh;
+        border-radius: 16px;
+    }
+
+    .modal-header,
+    .modal-header-sea,
+    .modal-header-run {
+        padding: 14px 18px;
+    }
+
+    .modal-header h2,
+    .modal-header-sea h2,
+    .modal-header-run h2 {
+        font-size: 1.6rem;
+    }
+
+    .close-modal {
+        padding: 4px 8px; /* крупнее зона тапа */
+    }
+
+    .modal-body {
+        padding: 16px;
+    }
+
+    .modal-body h3 {
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+
+    /* 600–748px: две колонки, вертикальные карточки */
+    .modal-body .plant-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+
+    .plant-grid > div {
+        padding: 14px 10px;
+        border-radius: 12px;
+    }
+
+    .plant-grid > div .plant-icon,
+    .plant-grid > div .music-icon {
+        font-size: 2.4rem;
+        margin-bottom: 8px;
+    }
+
+    .plant-grid > div .music-icon svg {
+        width: 44px;
+        height: 44px;
+    }
+
+    .plant-grid > div h3 {
+        font-size: 1.05rem;
+        margin-bottom: 4px;
+    }
+
+    .plant-grid > div p {
+        font-size: 0.85rem;
+        line-height: 1.3;
+    }
+
+    .customMusicUpload {
+        padding: 12px;
+    }
+
+    .customMusicUpload input[type="file"] {
+        max-width: 100%;
+    }
+
+    .selected-plant-display,
+    .selected-plant-display-sea,
+    .selected-plant-display-run {
+        padding: 12px;
+    }
+
+    .selected-plant-display p,
+    .selected-plant-display-sea p,
+    .selected-plant-display-run p,
+    .selected-plant-display-run span {
+        font-size: 1.05rem;
+    }
+
+    #selectedPlant,
+    #selectedMusic {
+        font-size: 1.2rem;
+    }
+
+    .ApplySelection,
+    .ApplySelection-sea,
+    .ApplySelection-run {
+        padding: 16px;
+        font-size: 1.1rem;
+        min-height: 52px;
+    }
+}
+
+/* < 600px: одна колонка, карточка на всю ширину — иконка слева, текст справа */
+@media (max-width: 599px) {
+    .modal-body .plant-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .plant-grid > div {
+        display: grid;
+        grid-template-columns: 56px 1fr;
+        column-gap: 14px;
+        align-items: center;
+        padding: 10px 14px;
+        text-align: left;
+    }
+
+    .plant-grid > div .plant-icon,
+    .plant-grid > div .music-icon {
+        grid-column: 1;
+        grid-row: 1 / span 2;
+        margin: 0;
+        font-size: 2.2rem;
+        text-align: center;
+    }
+
+    .plant-grid > div .music-icon svg {
+        width: 40px;
+        height: 40px;
+    }
+
+    .plant-grid > div h3 {
+        grid-column: 2;
+        grid-row: 1;
+        align-self: end;
+        margin: 0;
+        font-size: 1rem;
+    }
+
+    .plant-grid > div p {
+        grid-column: 2;
+        grid-row: 2;
+        align-self: start;
+        font-size: 0.8rem;
+    }
+}

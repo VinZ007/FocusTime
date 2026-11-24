@@ -1,0 +1,679 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Comfortaa:wght@300..700&family=Exo+2:ital,wght@0,100..900;1,100..900&family=Fascinate&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Exo 2', sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #0c291f 0%, #143727 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    position: relative;
+    overflow-x: hidden;
+}
+
+
+
+.stat-card {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #3d5a2c;
+    text-align: center;
+}
+
+.stat-card-emoji {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.stat-card-label {
+    color: #c8e6c9;
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+
+.stat-card-value {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.stat-card-value--green {
+    color: #4caf50;
+}
+
+.stat-card-value--blue {
+    color: #00caff;
+}
+
+.stat-card-value--orange {
+    color: #ff6600;
+}
+
+.stat-card-value--lime {
+    color: #81c784;
+}
+
+#bannerImage,
+#bioEdit {
+    display: none;
+}
+
+.bio-save-btn {
+    margin-right: 10px;
+}
+
+.bio-actions {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.backbtn {
+    left: 1vh;
+    top: 2vh;
+    position: fixed;
+    color: #d1fae5;
+    width: auto;
+    min-width: 140px;
+    height: 44px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: linear-gradient(135deg, #1a3c2f 0%, #2d5c47 100%);
+    border-radius: 16px;
+    font-family: 'Caveat', cursive;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    border: 2px solid #3c7a5e;
+    padding: 0 20px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+}
+
+.backbtn i {
+    margin-right: 8px;
+    font-size: 1.3rem;
+}
+
+/* Переключатель языка: тот же вид, что .backbtn, но в правом верхнем углу */
+.lang-btn {
+    left: auto;
+    right: 1vh;
+    min-width: 120px;
+    white-space: nowrap;
+}
+
+.backbtn {
+    white-space: nowrap;
+}
+
+.container {
+    max-width: 1000px;
+    width: 100%;
+    height: auto;
+    min-height: 700px;
+    background-color: #1a3c2f;
+    border-radius: 24px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+    overflow: hidden;
+    border: 2px solid #2d4a3c;
+    position: relative;
+    margin-top: 40px;
+}
+
+h3 {
+    color: white;
+    margin-bottom: 5px;
+}
+
+.profile-card {
+    background: rgba(14, 26, 7, 0.85);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    border: 1px solid #2d4d18;
+}
+
+.profile-banner {
+    height: 200px;
+    background: linear-gradient(135deg, #2d572c 0%, #1a3d1a 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.profile-banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.banner-upload-btn {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    background: rgba(0, 0, 0, 0.7);
+    border: none;
+    padding: 8px 15px;
+    border-radius: 6px;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.3s ease;
+}
+
+.banner-upload-btn:hover {
+    background: rgba(0, 0, 0, 0.9);
+}
+
+.profile-header {
+    padding: 0 30px;
+    position: relative;
+    margin-top: -50px;
+}
+
+.avatar-container {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 5px solid rgba(14, 26, 7, 0.85);
+    overflow: hidden;
+    background: linear-gradient(135deg, #2d572c 0%, #1a3d1a 100%);
+    position: relative;
+}
+
+.avatar-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.avatar-upload-btn {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.8);
+    border: none;
+    padding: 8px;
+    color: white;
+    cursor: pointer;
+    font-size: 12px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.avatar-container:hover .avatar-upload-btn {
+    opacity: 1;
+}
+
+.profile-info {
+    padding: 20px 30px 30px;
+}
+
+.profile-name {
+    font-size: 28px;
+    color: #c8e6c9;
+    font-weight: 700;
+    margin-bottom: 5px;
+    font-family: 'Sofia Sans', sans-serif;
+}
+
+.profile-email {
+    color: #81c784;
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+.profile-bio {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 25px;
+    min-height: 80px;
+    border: 1px solid #3d5a2c;
+}
+
+.bio-text {
+    color: #c8e6c9;
+    line-height: 1.6;
+    font-size: 15px;
+}
+
+.edit-bio-btn {
+    margin-top: 10px;
+    padding: 8px 16px;
+    background: rgba(76, 175, 80, 0.2);
+    border: 1px solid #4caf50;
+    border-radius: 6px;
+    color: #4caf50;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.edit-bio-btn:hover {
+    background: rgba(76, 175, 80, 0.3);
+}
+
+.bio-textarea {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid #3d5a2c;
+    border-radius: 8px;
+    padding: 12px;
+    color: white;
+    font-family: 'Fira Sans', sans-serif;
+    font-size: 15px;
+    resize: vertical;
+    min-height: 100px;
+}
+
+.bio-textarea:focus {
+    outline: none;
+    border-color: #4caf50;
+}
+
+.section-title {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #e8f5e9;
+    font-family: 'Sofia Sans', sans-serif;
+}
+
+
+.save-btn {
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(to bottom, #2d572c 0%, #20400e 100%);
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+    font-family: 'Sofia Sans', sans-serif;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.save-btn:hover {
+    background: linear-gradient(to bottom, #3d6b3c 0%, #2d572c 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(44, 87, 44, 0.4);
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.message {
+    padding: 10px 20px;
+    margin: 10px 0;
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+.message.success {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.message.error {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+/* ===================== АДАПТИВ ===================== */
+
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+
+    .profile-banner {
+        height: 150px;
+    }
+
+    .avatar-container {
+        width: 100px;
+        height: 100px;
+    }
+
+    .profile-header {
+        padding: 0 20px;
+        margin-top: -50px;
+    }
+
+    .profile-info {
+        padding: 15px 20px 20px;
+    }
+
+    .profile-name {
+        font-size: 24px;
+        overflow-wrap: anywhere;
+    }
+
+    .profile-email {
+        overflow-wrap: anywhere;
+    }
+}
+
+@media (max-width: 748px) {
+    html {
+        overflow-x: hidden;
+    }
+
+    /* Место сверху под фиксированные кнопки .backbtn и #langToggleBtn */
+    body {
+        padding: 60px 10px 20px;
+        align-items: flex-start;
+        min-height: 100vh;
+        min-height: 100dvh;
+    }
+
+    .backbtn {
+        left: 8px;
+        top: 8px;
+        min-width: 0;
+        height: 44px;
+        min-height: 44px;
+        padding: 0 14px;
+        font-size: 1.1rem;
+        border-radius: 14px;
+    }
+
+    .backbtn i {
+        margin-right: 6px;
+        font-size: 1.15rem;
+    }
+
+    .lang-btn {
+        left: auto;
+        right: 8px;
+        min-width: 0;
+    }
+
+    .container {
+        width: 100%;
+        min-height: 0;
+        margin-top: 0;
+        border-radius: 20px;
+    }
+
+    .profile-card {
+        border-radius: 14px;
+    }
+
+    .profile-bio,
+    .bio-text,
+    .bio-textarea {
+        overflow-wrap: anywhere;
+        word-break: break-word;
+    }
+
+    .bio-textarea {
+        max-width: 100%;
+        font-size: 16px; /* 16px — чтобы iOS не зумил страницу при фокусе */
+    }
+
+    /* Кнопки — удобная зона тапа */
+    .edit-bio-btn,
+    .banner-upload-btn,
+    .save-btn {
+        min-height: 44px;
+        padding: 10px 16px;
+    }
+
+    .edit-bio-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+    }
+
+    .banner-upload-btn {
+        bottom: 10px;
+        right: 10px;
+    }
+
+    /* На тач-экранах нет :hover — кнопка загрузки аватара всегда видна */
+    .avatar-upload-btn {
+        opacity: 1;
+        min-height: 44px;
+        padding: 8px;
+    }
+
+    /* Уведомление: плашка, прижатая к низу экрана */
+    .message {
+        position: fixed;
+        left: 10px;
+        right: 10px;
+        bottom: 10px;
+        margin: 0;
+        z-index: 1100;
+        text-align: center;
+        font-size: 14px;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+    }
+}
+
+@media (max-width: 600px) {
+    body {
+        padding: 60px 8px 16px;
+    }
+
+    .container {
+        padding: 8px;
+        border-radius: 18px;
+    }
+
+    .profile-banner {
+        height: 120px;
+    }
+
+    .avatar-container {
+        width: 90px;
+        height: 90px;
+        border-width: 4px;
+    }
+
+    .profile-header {
+        padding: 0 16px;
+        margin-top: -45px;
+    }
+
+    .profile-info {
+        padding: 14px 16px 18px;
+    }
+
+    .profile-name {
+        font-size: clamp(18px, 5.5vw, 24px);
+    }
+
+    .section-title {
+        font-size: 18px;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 6px;
+        border-radius: 16px;
+    }
+
+    .profile-card {
+        border-radius: 12px;
+    }
+
+    .profile-banner {
+        height: 100px;
+    }
+
+    .avatar-container {
+        width: 80px;
+        height: 80px;
+        border-width: 3px;
+    }
+
+    .profile-header {
+        padding: 0 14px;
+        margin-top: -40px;
+    }
+
+    .profile-info {
+        padding: 12px 14px 16px;
+    }
+
+    .profile-name {
+        font-size: 20px;
+    }
+
+    .profile-email {
+        font-size: 13px;
+        margin-bottom: 12px;
+    }
+
+    .profile-bio {
+        padding: 12px;
+        min-height: 64px;
+        margin-bottom: 20px;
+    }
+
+    .bio-text {
+        font-size: 14px;
+    }
+
+    .bio-textarea {
+        padding: 10px;
+        min-height: 90px;
+    }
+
+    /* Кнопки «Сохранить» / «Отмена» делят ширину поровну, «Редактировать» — на всю ширину */
+    .bio-actions {
+        gap: 10px;
+    }
+
+    .bio-actions .edit-bio-btn {
+        flex: 1 1 0;
+        margin-right: 0;
+    }
+
+    #bioDisplay .edit-bio-btn {
+        width: 100%;
+    }
+
+    .section-title {
+        font-size: 17px;
+        margin-bottom: 12px;
+    }
+
+    .stat-card {
+        padding: 14px;
+    }
+
+    .stat-card-emoji {
+        font-size: 26px;
+        margin-bottom: 6px;
+    }
+
+    .stat-card-label {
+        font-size: 14px;
+        margin-bottom: 6px;
+    }
+
+    .stat-card-value {
+        font-size: 20px;
+    }
+
+    .backbtn {
+        font-size: 1.05rem;
+        padding: 0 12px;
+    }
+
+    .message {
+        font-size: 13px;
+        padding: 10px 14px;
+    }
+}
+
+@media (max-width: 360px) {
+    body {
+        padding: 58px 6px 12px;
+    }
+
+    .container {
+        padding: 4px;
+    }
+
+    .profile-banner {
+        height: 90px;
+    }
+
+    .profile-header {
+        padding: 0 12px;
+    }
+
+    .profile-info {
+        padding: 12px 12px 14px;
+    }
+
+    .profile-name {
+        font-size: 18px;
+    }
+
+    .stat-card {
+        padding: 12px;
+    }
+
+    .stat-card-label {
+        font-size: 13px;
+    }
+
+    .stat-card-value {
+        font-size: 18px;
+    }
+
+    .backbtn {
+        left: 6px;
+        top: 6px;
+        padding: 0 10px;
+        font-size: 1rem;
+    }
+
+    .backbtn i {
+        margin-right: 4px;
+    }
+
+    .lang-btn {
+        left: auto;
+        right: 6px;
+    }
+}
